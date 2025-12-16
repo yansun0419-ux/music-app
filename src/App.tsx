@@ -1,33 +1,46 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import axios from "axios";
 import "./App.css";
 
+interface Song {
+  id: number;
+  name: string;
+}
+
 function App() {
-  const [count, setCount] = useState(0);
+  const apiUrl = import.meta.env.VITE_API_URL;
+  const [songs, setSongs] = useState<Song[]>([]);
+
+  const fetchSongs = async () => {
+    try {
+      const response = await axios.get<{ result: { songs: Song[] } }>(
+        `${apiUrl}/search?keywords=%E6%B5%B7%E9%98%94%E5%A4%A9%E7%A9%BA`
+      );
+      setSongs(
+        response.data.result.songs.map((song) => ({
+          id: song.id,
+          name: song.name,
+        }))
+      );
+    } catch (error) {
+      console.error("Error fetching songs:", error);
+    }
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
       <h1>Global Music App</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+      <button onClick={fetchSongs}>Search</button>
+
+      <div>
+        {songs.map((song) => (
+          <div key={song.id}>
+            <h2>{song.id}</h2>
+            <h2>{song.name}</h2>
+          </div>
+        ))}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
