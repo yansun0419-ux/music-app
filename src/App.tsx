@@ -1,6 +1,6 @@
-import { useState } from "react";
-import axios from "axios";
-import "./App.css";
+import { useState } from 'react';
+import axios from 'axios';
+import './App.css';
 
 interface Song {
   id: number;
@@ -23,7 +23,7 @@ function App() {
         }))
       );
     } catch (error) {
-      console.error("Error fetching songs:", error);
+      console.error('Error fetching songs:', error);
     }
   };
 
