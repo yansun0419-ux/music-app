@@ -33,7 +33,7 @@ function App() {
 
       <button onClick={fetchSongs}>Search</button>
 
-      <div>
+      <div className="bg-red-500 min-h-screen p-10">
         {songs.map((song) => (
           <div key={song.id}>
             <h2>{song.id}</h2>

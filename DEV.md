@@ -1,4 +1,5 @@
-一、 战术分期 (Version Strategy)
+# 一、 战术分期 (Version Strategy)
+
 我们不求全，只求**“核心路径跑通”** + “工程亮点突出”。
 
 🚀 Ver 1.0：核心听歌 ( The "Showcase" Version ) - 必须完成
